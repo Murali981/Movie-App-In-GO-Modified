@@ -1,6 +1,7 @@
 package main
 
 import (
+	"backend/internal/graph"
 	"backend/internal/models"
 	"encoding/json"
 	"errors"
@@ -494,3 +495,36 @@ func (app *application) AllMovies(w http.ResponseWriter , r *http.Request) {
 
 
 	}
+
+	 func (app *application) moviesGraphQL(w http.ResponseWriter , r *http.Request) {
+		/// We need to populate the graph type with the movies....
+		movies , _ := app.DB.AllMovies()
+
+
+		//// Get the query from the request.....
+		 q , _ := io.ReadAll(r.Body)
+		  query := string(q) // We has the query as a string....
+
+
+		//// Create a new variable of type *graph.Graph....
+		  g := graph.New(movies)
+
+
+		/// Set the query string on the variable....
+		g.QueryString = query
+
+
+		/// Perform the query.....
+		  resp , err := g.Query()
+		   if err != nil {
+			app.errorJSON(w , err)
+			return
+		   }
+
+
+		/// Send the response.....
+		j , _ := json.MarshalIndent(resp , "" , "\t")
+		w.Header().Set("Content-Type" , "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write(j)
+	 }
