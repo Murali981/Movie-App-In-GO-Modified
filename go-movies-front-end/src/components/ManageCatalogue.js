@@ -23,15 +23,16 @@ const ManageCatalogue = () => {
       headers: headers,
     };
 
-    fetch(`/admin/movie`, requestOptions).then((response) =>
-      response
-        .json()
-        .then((data) => {
-          setMovies(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
+    fetch(`${process.env.REACT_APP_BACKEND}/admin/movie`, requestOptions).then(
+      (response) =>
+        response
+          .json()
+          .then((data) => {
+            setMovies(data);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
     );
   }, [jwtToken, navigate]);
   return (

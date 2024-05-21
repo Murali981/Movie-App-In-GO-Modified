@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/static/js/main.24af2d15.js",
+    "static/media/movie_tickets.jpg": "/static/media/movie_tickets.8bbaed3446d8952bd14a.jpg",
+    "index.html": "/index.html",
+    "main.24af2d15.js.map": "/static/js/main.24af2d15.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.24af2d15.js"
+  ]
+}
